@@ -66,3 +66,10 @@ class TestCond(unittest.TestCase):
 			self.fail
 		)
 		self.assertIsNone(actual)
+
+	def test_cond_should_return_left_with_error_value_when_provided(self):
+		actual = Either.cond(lambda x: x > 0, -3, 'Value must be positive.').fold(
+			lambda x: x,
+			self.fail
+		)
+		self.assertEqual(actual, 'Value must be positive.')

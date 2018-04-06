@@ -63,10 +63,10 @@ class Either(ABC):
 			return Left(e)
 
 	@classmethod
-	def cond(cls, predicate, value):
+	def cond(cls, predicate, value, error=None):
 		if (predicate(value)):
 			return Right(value)
-		return Left()
+		return Left(error)
 
 Either.register(Left)
 Either.register(Right)
