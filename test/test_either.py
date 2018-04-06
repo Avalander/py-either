@@ -43,3 +43,26 @@ class TestTryExcept(unittest.TestCase):
 		)
 
 		self.assertEqual(actual, 'potato')
+
+class TestCond(unittest.TestCase):
+	def test_cond_should_return_right_when_value_fulfills_predicate(self):
+		actual = Either.cond(lambda x: x > 3, 4)
+		self.assertIsInstance(actual, Right)
+
+	def test_cond_should_return_right_with_value_when_it_fulfills_predicate(self):
+		actual = Either.cond(lambda x: len(x) > 3, 'Twilight Sparkle').fold(
+			self.fail,
+			lambda x: x
+		)
+		self.assertEqual(actual, 'Twilight Sparkle')
+
+	def test_cond_should_return_left_when_value_does_not_fulfill_predicate(self):
+		actual = Either.cond(lambda x: x > 3, 2)
+		self.assertIsInstance(actual, Left)
+
+	def test_cond_should_return_left_without_value_when_it_does_not_fulfill_predicate(self):
+		actual = Either.cond(lambda x: len(x) > 3, 'Mu').fold(
+			lambda x: x,
+			self.fail
+		)
+		self.assertIsNone(actual)
