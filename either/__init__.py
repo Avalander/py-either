@@ -70,21 +70,3 @@ class Either(ABC):
 
 Either.register(Left)
 Either.register(Right)
-
-
-if __name__ == '__main__':
-	result = (Either.Right(153)
-		.map(lambda x: x + 1)
-		.chain(lambda x: Left(x) if x < 150 else Right(x))
-		.fold(
-			lambda x: 'left {}'.format(x),
-			lambda y: 'right {}'.format(y)))
-	print(result)
-	print(Left('potato'))
-
-	def throw(reason):
-		raise ValueError(reason)
-	
-	result_2 = Either.try_except(throw, 'Not enough')
-	print(result_2)
-
