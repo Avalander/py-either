@@ -48,6 +48,26 @@ class Either(ABC):
 	def Right(cls, value):
 		return Right(value)
 
+	@classmethod
+	def maybe(cls, value):
+		if value is not None:
+			return Right(value)
+		return Left()
+
+	@classmethod
+	def try_except(cls, computation, *args):
+		try:
+			result = computation(args)
+			return Right(result)
+		except Exception as e:
+			return Left(e)
+
+	@classmethod
+	def cond(cls, predicate, *args):
+		if (predicate(args)):
+			return Right(None)
+		return Left()
+
 Either.register(Left)
 Either.register(Right)
 
@@ -61,3 +81,10 @@ if __name__ == '__main__':
 			lambda y: 'right {}'.format(y)))
 	print(result)
 	print(Left('potato'))
+
+	def throw(reason):
+		raise ValueError(reason)
+	
+	result_2 = Either.try_except(throw, 'Not enough')
+	print(result_2)
+
