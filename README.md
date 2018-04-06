@@ -1,3 +1,3 @@
 # PyEither
 
-PyEither is simply an academic exercise to implement the Either monad in Python.
+PyEither is simply an exercise to implement the Either monad in Python.
