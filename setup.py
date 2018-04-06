@@ -13,6 +13,6 @@ setup(
 		'Programming Language :: Python :: 3.4'
 	],
 	keywords='either functional',
-	packages=find_packages(),
+	packages=find_packages(exclude='test'),
 	install_requires=[]
 )

@@ -57,14 +57,14 @@ class Either(ABC):
 	@classmethod
 	def try_except(cls, computation, *args):
 		try:
-			result = computation(args)
+			result = computation(*args)
 			return Right(result)
 		except Exception as e:
 			return Left(e)
 
 	@classmethod
 	def cond(cls, predicate, *args):
-		if (predicate(args)):
+		if (predicate(*args)):
 			return Right(None)
 		return Left()
 
