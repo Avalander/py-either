@@ -6,12 +6,10 @@ from either import Left, Right
 class TestMap(unittest.TestCase):
 	def test_right_should_return_right(self):
 		actual = Right(3)
-
 		self.assertIsInstance(actual, Right)
 
 	def test_map_should_return_right(self):
 		actual = Right(3).map(lambda x: x + 1)
-
 		self.assertIsInstance(actual, Right)
 
 	def test_map_should_apply_transformation_to_value(self):
@@ -19,13 +17,11 @@ class TestMap(unittest.TestCase):
 			self.fail,
 			lambda x: x
 		)
-
 		self.assertEqual(actual, 4)
 
 class TestChain(unittest.TestCase):
 	def test_chain_should_fail_if_fn_does_not_return_either(self):
 		either = Right(3)
-
 		self.assertRaises(TypeError, either.chain, lambda x: x)
 
 	def test_chain_should_return_the_right_returned_by_computation(self):
@@ -46,5 +42,4 @@ class TestFold(unittest.TestCase):
 			self.fail,
 			lambda x: x
 		)
-
 		self.assertEqual(actual, 3)
